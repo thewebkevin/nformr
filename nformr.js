@@ -69,10 +69,10 @@ $(function () {
         generated += lawShort + " say " + killed + addAnd + injured + " in a " + crime + " in " + city + " " + day + ".</p>";
         generated += "<p>According to the " + lawLong + ", " + killed + addAnd + injured + " in a " + crime + " at " + streetAddress + " in " + city + " " + day + ". </p>"
         generated += "<p>This is a developing story. Stay tuned to <a href ='http://www.wbrz.com/'>WBRZ News 2</a> on <a href ='https://www.facebook.com/WBRZNews2'>Facebook</a> and <a href ='https://twitter.com/wbrz'>Twitter</a> for the lastest updates as they become available.</p>";
-        generated += "<img src='" + googleMapUrl + "'>";
 
-
+        if ($('#mapCheck').is(':checked')) {
+            generated += "<img src='" + googleMapUrl + "'>";
+        }
         $("#generatedHTML").html(generated);
-
     });
 });
