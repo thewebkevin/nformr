@@ -6,7 +6,7 @@ $(function () {
         var city = document.getElementById('city').value;
         var cityAPI = city.replace(" ", "+");
         var state = document.getElementById('state').value;
-        var crime = document.getElementById('crime').value;
+        var crime = document.getElementById('crime').value.toLowerCase();
         var streetAddress = document.getElementById('streetAddress').value;
         var addressAPI = streetAddress.replace(" ", "+");
         var lawLong = document.getElementById('lawLong').value;
