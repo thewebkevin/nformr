@@ -73,6 +73,11 @@ $(function () {
         if ($('#mapCheck').is(':checked')) {
             generated += "<img src='" + googleMapUrl + "'>";
         }
-        $("#generatedHTML").html(generated);
+
+        if ($('#htmlCheck').is(':checked')) {
+            $("#generatedHTML").text(generated);
+        } else {
+            $("#generatedHTML").html(generated);
+        }
     });
 });
