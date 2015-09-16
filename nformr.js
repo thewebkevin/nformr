@@ -91,12 +91,15 @@ function getFormData() {
 $(function () {
     "use strict";
     $("#generateButton").click(function () {
-        generated = " ";
+        generated = "<p>";
         getFormData();
-        if ($('#htmlCheck').is(':checked')) {
-            $("#generatedHTML").text(generated);
-        } else {
-            $("#generatedHTML").html(generated);
-        }
+        $("#generatedHTML").html(generated);
+
+    });
+
+    $("#generateHtml").click(function () {
+        generated = "<p>";
+        getFormData();
+        $("#generatedHTML").text(generated);
     });
 });
