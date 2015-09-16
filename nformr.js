@@ -100,7 +100,7 @@ $(function () {
     $("#generateHtml").click(function () {
         generated = "<textarea rows='17' cols='50'><p>";
         getFormData();
-        generated += "</textarea>"
+        generated += "</textarea>";
         $("#generatedHTML").html(generated);
     });
 });
