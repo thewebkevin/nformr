@@ -98,8 +98,9 @@ $(function () {
     });
 
     $("#generateHtml").click(function () {
-        generated = "<p>";
+        generated = "<textarea rows='17' cols='50'><p>";
         getFormData();
-        $("#generatedHTML").text(generated);
+        generated += "</textarea>"
+        $("#generatedHTML").html(generated);
     });
 });
