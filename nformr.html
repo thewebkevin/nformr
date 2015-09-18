@@ -2,50 +2,55 @@
     <title>NFORMR</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script language="javascript" type="text/javascript" src="nformr.js"></script>
+    <link rel="stylesheet" type="text/css" href="nformrstyle.css">
 </head>
 
 <body>
-    <form>
-        People Killed:
-        <br>
-        <input type="number" id="peopleKilled" name="peopleKilled" value="0">
-        <br> People Injured:
-        <br>
-        <input type="number" id="peopleInjured" name="peopleInjured" value="0">
-        <br> City:
-        <br>
-        <input type="text" id="city" name="city">
-        <br> State:
-        <br>
-        <input type="text" id="state" name="state" value="LA">
-        <br> Crime:
-        <br>
-        <input type="text" id="crime" name="crime">
-        <br> Street Address:
-        <br>
-        <input type="text" id="streetAddress" name="streetAddress">
-        <br> Law Enforcement Agency:
-        <br>
-        <input type="text" id="lawLong" name="lawLong">
-        <br> Day of the Week:
-        <br>
-        <select id="day">
-            <option value="Sunday">Sunday</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-        </select>
-        <br>
-        <br>
-        <input type="checkbox" id="mapCheck" name="mapCheck" value="map"> Add a location map
-        <br>
-        <br>
-        <button id="generateButton" type="button">Generate Preview</button>
-        <button id="generateHtml" type="button">Generate HTML Code</button>
+    <div id="content">
+        <div id="formdiv">
+            <form>
+                People Killed:
+                <br>
+                <input type="number" id="peopleKilled" name="peopleKilled" value="0">
+                <br> People Injured:
+                <br>
+                <input type="number" id="peopleInjured" name="peopleInjured" value="0">
+                <br> City:
+                <br>
+                <input type="text" id="city" name="city">
+                <br> State:
+                <br>
+                <input type="text" id="state" name="state" value="LA">
+                <br> Crime:
+                <br>
+                <input type="text" id="crime" name="crime">
+                <br> Street Address:
+                <br>
+                <input type="text" id="streetAddress" name="streetAddress">
+                <br> Law Enforcement Agency:
+                <br>
+                <input type="text" id="lawLong" name="lawLong">
+                <br> Day of the Week:
+                <br>
+                <select id="day">
+                    <option value="Sunday">Sunday</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                </select>
+                <br>
+                <br>
+                <input type="checkbox" id="mapCheck" name="mapCheck" value="map"> Add a location map
+                <br>
+                <br>
+                <button id="generateButton" type="button">Generate Preview</button>
+                <button id="generateHtml" type="button">Generate HTML Code</button>
 
-    </form>
-    <div id="generatedHTML"></div>
+            </form>
+        </div>
+        <div id="generatedHTML"></div>
+    </div>
 </body>
