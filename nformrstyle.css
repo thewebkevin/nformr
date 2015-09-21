@@ -3,7 +3,16 @@
 }
 
 #formdiv {
-    float: left;
+    display: flex;
+    flex-direction: row;
+}
+
+#formcol1 {
+    order: 1;
+}
+
+#formcol2 {
+    order: 2;
 }
 
 #generatedHtml p {
