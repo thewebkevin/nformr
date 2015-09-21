@@ -15,6 +15,16 @@
     order: 2;
 }
 
+#formcol3 {
+    order: 3;
+}
+
 #generatedHtml p {
     clear: left;
+}
+
+#formcol1,
+#formcol2,
+formcol3 {
+    margin: 0px 2.5%;
 }

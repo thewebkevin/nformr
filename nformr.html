@@ -9,6 +9,7 @@
     <div id="content">
         <div id="formdiv">
             <div id="formcol1">
+                <p>Story Data:</p>
                 <form>
                     People Killed:
                     <br>
@@ -18,19 +19,19 @@
                     <input type="number" id="peopleInjured" name="peopleInjured" value="0">
                     <br> City:
                     <br>
-                    <input type="text" id="city" name="city">
+                    <input type="text" id="city" name="city" placeholder="Baton Rouge">
                     <br> State:
                     <br>
                     <input type="text" id="state" name="state" value="LA">
                     <br> Crime:
                     <br>
-                    <input type="text" id="crime" name="crime">
+                    <input type="text" id="crime" name="crime" placeholder="shooting">
                     <br> Street Address:
                     <br>
-                    <input type="text" id="streetAddress" name="streetAddress">
+                    <input type="text" id="streetAddress" name="streetAddress" placeholder="910 Ben Hurr Road">
                     <br> Law Enforcement Agency:
                     <br>
-                    <input type="text" id="lawLong" name="lawLong">
+                    <input type="text" id="lawLong" name="lawLong" placeholder="Baton Rouge Police Department">
                     <br> Day of the Week:
                     <br>
                     <select id="day">
@@ -42,19 +43,23 @@
                         <option value="Friday">Friday</option>
                         <option value="Saturday">Saturday</option>
                     </select>
-                    <br>
-                    <br>
-                    <input type="checkbox" id="mapCheck" name="mapCheck" value="map"> Add a location map
-                    <br>
-                    <br>
-                    <button id="generateButton" type="button">Generate Preview</button>
-                    <button id="generateHtml" type="button">Generate HTML Code</button>
-
                 </form>
             </div>
             <div id="formcol2">
-                <div id="victimHTML"></div>
+                <div id="killedHTML"></div>
             </div>
+            <div id="formcol3">
+                <div id="injuredHTML"></div>
+            </div>
+        </div>
+        <div id="final">
+            <br>
+            <br>
+            <input type="checkbox" id="mapCheck" name="mapCheck" value="map"> Add a location map
+            <br>
+            <br>
+            <button id="generateButton" type="button">Generate Preview</button>
+            <button id="generateHtml" type="button">Generate HTML Code</button>
         </div>
         <div id="generatedHTML"></div>
     </div>

@@ -21,7 +21,8 @@ var addAnd;
 var keyAPI = "AIzaSyANnAoaacT1T4QC7Kd9W6e9muA2CZb9FIM";
 var googleMapUrl;
 var generated = "<p>";
-var victimform = "";
+var killedForm = "";
+var injuredForm = "";
 
 function getFormData() {
     "use strict";
@@ -114,13 +115,28 @@ $(function () {
         $("#generatedHTML").html(generated);
     });
 
-    $("#city").focus(function () {
-        victimform = " ";
+    $("#peopleKilled").blur(function () {
+        killedForm = " ";
         getFormData();
         var i = peopleKilled;
+        var counter = 0;
         for (i; i > 0; i--) {
-            victimform += "<form>Victim Name:<br><input type='text' id='victimName' name='victimName'><br>Victim Age:<br><input type='number' id='victimAge' name='victimAge'><br>Victim Hometown:<br><input type='text' id='victimHome' name='victimHome'></form>";
+            counter++;
+            killedForm += "<p>Killed " + counter + ":</p><form>Name:<br><input type='text' id='killedName" + counter + "' name='killedName" + counter + "'><br>Age:<br><input type='number' id='killedAge" + counter + "' name='killedAge" + counter + "'><br><input type='checkbox' id='atScene" + counter + "' name='atScene" + counter + "' value='map'>Died at Scene<br></form>";
         }
-        $("#victimHTML").html(victimform);
+        $("#killedHTML").html(killedForm);
+    });
+
+
+    $("#peopleInjured").blur(function () {
+        injuredForm = " ";
+        getFormData();
+        var i = peopleInjured;
+        var counter = 0;
+        for (i; i > 0; i--) {
+            counter++;
+            injuredForm += "<p>Injured " + counter + ":</p><form>Name:<br><input type='text' id='injuredName" + counter + "' name='injuredName" + counter + "'><br>Age:<br><input type='number' id='injuredAge" + counter + "' name='injuredAge" + counter + "'><br></form>";
+        }
+        $("#injuredHTML").html(injuredForm);
     });
 });
