@@ -19,19 +19,22 @@
                     <input type="number" id="peopleInjured" name="peopleInjured" value="0">
                     <br> City:
                     <br>
-                    <input type="text" id="city" name="city" placeholder="Baton Rouge">
+                    <input type="text" id="city" name="city">
                     <br> State:
                     <br>
                     <input type="text" id="state" name="state" value="LA">
                     <br> Crime:
                     <br>
-                    <input type="text" id="crime" name="crime" placeholder="shooting">
+                    <select id="crime">
+                        <option value="shooting">Shooting</option>
+                        <option value="stabbing">Stabbing</option>
+                    </select>
                     <br> Street Address:
                     <br>
-                    <input type="text" id="streetAddress" name="streetAddress" placeholder="910 Ben Hurr Road">
+                    <input type="text" id="streetAddress" name="streetAddress">
                     <br> Law Enforcement Agency:
                     <br>
-                    <input type="text" id="lawLong" name="lawLong" placeholder="Baton Rouge Police Department">
+                    <input type="text" id="lawLong" name="lawLong">
                     <br>Date and Time:
                     <br>
                     <input type="datetime-local" id="date" name="date">
@@ -45,8 +48,6 @@
             </div>
         </div>
         <div id="final">
-            <br>
-            <br>
             <input type="checkbox" id="mapCheck" name="mapCheck" value="map"> Add a location map
             <br>
             <br>
