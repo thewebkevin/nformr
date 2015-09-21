@@ -23,6 +23,8 @@ var googleMapUrl;
 var generated = "<p>";
 var killedForm = "";
 var injuredForm = "";
+var time;
+var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 function getFormData() {
     "use strict";
@@ -35,13 +37,15 @@ function getFormData() {
     streetAddress = document.getElementById('streetAddress').value;
     addressAPI = streetAddress.replace(" ", "+");
     lawLong = document.getElementById('lawLong').value;
-    day = document.getElementById('day').value;
     googleMapUrl = "https://maps.googleapis.com/maps/api/staticmap?size=400x400&markers=" + streetAddress + "+" + city + "+" +
         state + "&key=" + keyAPI;
     tfKilled = false;
     tfInjured = false;
     killed = " ";
     injured = " ";
+    time = document.getElementById("date").value;
+    time = new Date(time);
+    day = days[time.getDay()];
 
     if (peopleKilled > 0) {
         tfKilled = true;
@@ -118,10 +122,10 @@ $(function () {
     $("#peopleKilled").blur(function () {
         killedForm = " ";
         getFormData();
-        var i = peopleKilled;
-        var counter = 0;
-        for (i; i > 0; i--) {
-            counter++;
+        var i = peopleKilled,
+            counter = 0;
+        for (i; i > 0; i -= 1) {
+            counter += 1;
             killedForm += "<p>Killed " + counter + ":</p><form>Name:<br><input type='text' id='killedName" + counter + "' name='killedName" + counter + "'><br>Age:<br><input type='number' id='killedAge" + counter + "' name='killedAge" + counter + "'><br><input type='checkbox' id='atScene" + counter + "' name='atScene" + counter + "' value='map'>Died at Scene<br></form>";
         }
         $("#killedHTML").html(killedForm);
@@ -131,10 +135,10 @@ $(function () {
     $("#peopleInjured").blur(function () {
         injuredForm = " ";
         getFormData();
-        var i = peopleInjured;
-        var counter = 0;
-        for (i; i > 0; i--) {
-            counter++;
+        var i = peopleInjured,
+            counter = 0;
+        for (i; i > 0; i -= 1) {
+            counter += 1;
             injuredForm += "<p>Injured " + counter + ":</p><form>Name:<br><input type='text' id='injuredName" + counter + "' name='injuredName" + counter + "'><br>Age:<br><input type='number' id='injuredAge" + counter + "' name='injuredAge" + counter + "'><br></form>";
         }
         $("#injuredHTML").html(injuredForm);
