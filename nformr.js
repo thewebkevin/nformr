@@ -11,8 +11,8 @@ var addressAPI;
 var lawLong;
 var lawShort;
 var day;
-var injured = " ";
-var killed = " ";
+var injured;
+var killed;
 var tfKilled;
 var tfInjured;
 var killedTense;
@@ -37,6 +37,10 @@ function getFormData() {
     day = document.getElementById('day').value;
     googleMapUrl = "https://maps.googleapis.com/maps/api/staticmap?size=400x400&markers=" + streetAddress + "+" + city + "+" +
         state + "&key=" + keyAPI;
+    tfKilled = false;
+    tfInjured = false;
+    killed = " ";
+    injured = " ";
 
     if (peopleKilled > 0) {
         tfKilled = true;
