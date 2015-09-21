@@ -21,6 +21,7 @@ var addAnd;
 var keyAPI = "AIzaSyANnAoaacT1T4QC7Kd9W6e9muA2CZb9FIM";
 var googleMapUrl;
 var generated = "<p>";
+var victimform = "";
 
 function getFormData() {
     "use strict";
@@ -107,5 +108,15 @@ $(function () {
         getFormData();
         generated += "</textarea>";
         $("#generatedHTML").html(generated);
+    });
+
+    $("#city").focus(function () {
+        victimform = " ";
+        getFormData();
+        var i = peopleKilled;
+        for (i; i > 0; i--) {
+            victimform += "<form>Victim Name:<br><input type='text' id='victimName' name='victimName'><br>Victim Age:<br><input type='number' id='victimAge' name='victimAge'><br>Victim Hometown:<br><input type='text' id='victimHome' name='victimHome'></form>";
+        }
+        $("#victimHTML").html(victimform);
     });
 });

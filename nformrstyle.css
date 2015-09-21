@@ -2,18 +2,10 @@
     font-family: sans-serif;
 }
 
-body {
-    background-color: midnightblue;
-}
-
-#content {
-    background-color: white;
-    margin: 2.5% 5%;
-    text-align: center;
-    padding: 2% 0;
+#formdiv {
+    float: left;
 }
 
 #generatedHtml p {
-    text-align: left;
-    padding: 0% 2%;
+    clear: left;
 }
