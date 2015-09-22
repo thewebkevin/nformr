@@ -31,8 +31,9 @@ var peopleInjurednum;
 var timeDescription;
 var timehour;
 var killedVictims = [];
-var victim = {};
-var i = 1;
+var injuredVictims = [];
+var killedVictim = {};
+var injuredVictim = {};
 
 function getFormData() {
     "use strict";
@@ -128,17 +129,33 @@ function getFormData() {
     }
 }
 
-function pushArray() {
+function pushKilled() {
     "use strict";
     getFormData();
+    var i = 1;
     for (i; i < (peopleKilled + 1); i += 1) {
-        victim = {
+        killedVictim = {
             firstName: document.getElementById("killedFName" + i).value,
             lastName: document.getElementById("killedLName" + i).value,
             age: document.getElementById("killedAge" + i).value,
             fullName: document.getElementById("killedFName" + i).value + " " + document.getElementById("killedLName" + i).value
         };
-        killedVictims.push(victim);
+        killedVictims.push(killedVictim);
+    }
+}
+
+function pushInjured() {
+    "use strict";
+    getFormData();
+    var i = 1;
+    for (i; i < (peopleInjured + 1); i += 1) {
+        injuredVictim = {
+            firstName: document.getElementById("injuredFName" + i).value,
+            lastName: document.getElementById("injuredLName" + i).value,
+            age: document.getElementById("injuredAge" + i).value,
+            fullName: document.getElementById("injuredFName" + i).value + " " + document.getElementById("injuredLName" + i).value
+        };
+        injuredVictims.push(injuredVictim);
     }
 }
 
