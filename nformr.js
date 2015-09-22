@@ -30,6 +30,9 @@ var peopleKillednum;
 var peopleInjurednum;
 var timeDescription;
 var timehour;
+var killedVictims = [];
+var victim = {};
+var i = 1;
 
 function getFormData() {
     "use strict";
@@ -122,6 +125,19 @@ function getFormData() {
 
     if ($('#mapCheck').is(':checked')) {
         generated += "<img src='" + googleMapUrl + "'>";
+    }
+}
+
+function pushArray() {
+    "use strict";
+    getFormData();
+    for (i; i < (peopleKilled + 1); i += 1) {
+        victim = {
+            firstName: document.getElementById("killedFName" + i).value,
+            lastName: document.getElementById("killedLName" + i).value,
+            age: document.getElementById("killedAge" + i).value
+        };
+        killedVictims.push(victim);
     }
 }
 
