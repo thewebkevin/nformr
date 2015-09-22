@@ -135,7 +135,8 @@ function pushArray() {
         victim = {
             firstName: document.getElementById("killedFName" + i).value,
             lastName: document.getElementById("killedLName" + i).value,
-            age: document.getElementById("killedAge" + i).value
+            age: document.getElementById("killedAge" + i).value,
+            fullName: document.getElementById("killedFName" + i).value + " " + document.getElementById("killedLName" + i).value
         };
         killedVictims.push(victim);
     }
