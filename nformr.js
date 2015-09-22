@@ -34,6 +34,57 @@ var killedVictims = [];
 var injuredVictims = [];
 var killedVictim = {};
 var injuredVictim = {};
+var killedID;
+var injuredID;
+var x = 0,
+    y = 0;
+
+function pushKilled() {
+    "use strict";
+    var i = 1;
+    for (i; i < (peopleKilled + 1); i += 1) {
+        killedVictim = {
+            firstName: document.getElementById("killedFName" + i).value,
+            lastName: document.getElementById("killedLName" + i).value,
+            age: document.getElementById("killedAge" + i).value,
+            fullName: document.getElementById("killedFName" + i).value + " " + document.getElementById("killedLName" + i).value
+        };
+        killedVictims.push(killedVictim);
+    }
+}
+
+function pushInjured() {
+    "use strict";
+    var i = 1;
+    for (i; i < (peopleInjured + 1); i += 1) {
+        injuredVictim = {
+            firstName: document.getElementById("injuredFName" + i).value,
+            lastName: document.getElementById("injuredLName" + i).value,
+            age: document.getElementById("injuredAge" + i).value,
+            fullName: document.getElementById("injuredFName" + i).value + " " + document.getElementById("injuredLName" + i).value
+        };
+        injuredVictims.push(injuredVictim);
+    }
+}
+
+function identify() {
+    "use strict";
+    for (x; x < killedVictims.length; x += 1) {
+        killedID = "";
+        killedID += killedVictims[x].fullName + ", " + killedVictims[x].age + ", ";
+        if (x === (killedVictims.length - 1)) {
+            killedID += "and ";
+        }
+    }
+
+    for (y; y < injuredVictims.length; y += 1) {
+        injuredID = "";
+        injuredID += injuredVictims[y].fullName + ", " + killedVictims[y].age + ", ";
+        if (y === (injuredVictims.length - 1)) {
+            injuredID += "and ";
+        }
+    }
+}
 
 function getFormData() {
     "use strict";
@@ -58,7 +109,6 @@ function getFormData() {
     peopleInjurednum = peopleInjured;
     peopleKillednum = peopleKilled;
     timehour = time.toTimeString();
-
 
     if ((time.getHours() + 5) < 12) {
         timeDescription = "morning";
@@ -117,7 +167,9 @@ function getFormData() {
     generated += city.toUpperCase() + " - ";
     if (peopleKilled > 0 || peopleInjured > 0) {
         generated += lawShort + " say " + killed + addAnd + injured + " in a " + crime + " in " + city + " " + day + " " + timeDescription + ".</p>";
-        generated += "<p>According to the " + lawLong + ", " + killed + addAnd + injured + " in a " + crime + " at " + streetAddress + " in " + city + " " + day + ".</p>";
+        if (killedVictims.length > 0) {
+            generated += "<p>According to the " + lawLong + ", " + killedID + killedTense + addAnd + injuredID + injuredTense + " in a " + crime + " at " + streetAddress + " in " + city + " " + day + ".</p>";
+        }
     } else {
         generated += lawShort + " are investigating a " + crime + " in " + city + " " + day + " " + timeDescription + ".</p>";
         generated += "<p>The " + lawLong + " is currently investigating a " + crime + " at " + streetAddress + " in " + city + " " + day + ".</p>";
@@ -126,36 +178,6 @@ function getFormData() {
 
     if ($('#mapCheck').is(':checked')) {
         generated += "<img src='" + googleMapUrl + "'>";
-    }
-}
-
-function pushKilled() {
-    "use strict";
-    getFormData();
-    var i = 1;
-    for (i; i < (peopleKilled + 1); i += 1) {
-        killedVictim = {
-            firstName: document.getElementById("killedFName" + i).value,
-            lastName: document.getElementById("killedLName" + i).value,
-            age: document.getElementById("killedAge" + i).value,
-            fullName: document.getElementById("killedFName" + i).value + " " + document.getElementById("killedLName" + i).value
-        };
-        killedVictims.push(killedVictim);
-    }
-}
-
-function pushInjured() {
-    "use strict";
-    getFormData();
-    var i = 1;
-    for (i; i < (peopleInjured + 1); i += 1) {
-        injuredVictim = {
-            firstName: document.getElementById("injuredFName" + i).value,
-            lastName: document.getElementById("injuredLName" + i).value,
-            age: document.getElementById("injuredAge" + i).value,
-            fullName: document.getElementById("injuredFName" + i).value + " " + document.getElementById("injuredLName" + i).value
-        };
-        injuredVictims.push(injuredVictim);
     }
 }
 
