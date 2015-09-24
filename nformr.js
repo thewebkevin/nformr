@@ -39,9 +39,11 @@ var injuredID;
 var peopleKilledInt;
 var peopleInjuredInt;
 var kWasWere;
+var kNotId;
+var iNotId;
 var iWasWere;
-var x = 0,
-    y = 0;
+var x;
+var y;
 
 function pushKilled() {
     "use strict";
@@ -83,8 +85,10 @@ function identify() {
     pushKilled();
     killedID = "";
     injuredID = "";
-    for (x; x < killedVictims.length; x += 1) {
+    x = 0;
+    y = 0;
 
+    for (x; x < killedVictims.length; x += 1) {
         killedID += killedVictims[x].fullName + ", " + killedVictims[x].age + ", ";
         if (x === (killedVictims.length - 2) && killedVictims.length > 1) {
             killedID += "and ";
@@ -92,8 +96,8 @@ function identify() {
     }
 
     for (y; y < injuredVictims.length; y += 1) {
-        injuredID += injuredVictims[y].fullName + ", " + killedVictims[y].age + ", ";
-        if (y === (injuredVictims.length - 1) && injuredVictims.length > 1) {
+        injuredID += injuredVictims[y].fullName + ", " + injuredVictims[y].age + ", ";
+        if (y === (injuredVictims.length - 2) && injuredVictims.length > 1) {
             injuredID += "and ";
         }
     }
@@ -124,6 +128,10 @@ function getFormData() {
     timehour = time.toTimeString();
     peopleKilledInt = parseInt(peopleKilled, "10");
     peopleInjuredInt = parseInt(peopleInjured, "10");
+
+    kNotId = peopleKilledInt - killedVictims.length;
+    iNotId = peopleInjuredInt - injuredVictims.length;
+
 
     if ((time.getHours() + 5) < 12) {
         timeDescription = "morning";
@@ -203,8 +211,10 @@ function getFormData() {
     generated += city.toUpperCase() + " - ";
     if (peopleKilled > 0 || peopleInjured > 0) {
         generated += lawShort + " say " + killed + addAnd + injured + " in a " + crime + " in " + city + " " + day + " " + timeDescription + ".</p>";
-        if (killedVictims.length > 0) {
+        if (killedVictims.length > 0 || injuredVictims.length > 0) {
             generated += "<p>According to the " + lawLong + ", " + killedID + kWasWere + addAnd + injuredID + iWasWere + " in a " + crime + " at " + streetAddress + " in " + city + " " + day + ".</p>";
+        } else {
+            generated += "<p>According to the " + lawLong + ", " + killed + addAnd + injured + " in a " + crime + " at " + streetAddress + " in " + city + " " + day + ".</p>";
         }
     } else {
         generated += lawShort + " are investigating a " + crime + " in " + city + " " + day + " " + timeDescription + ".</p>";
@@ -229,6 +239,7 @@ $(function () {
 
     $("#generateHtml").click(function () {
         generated = "<textarea rows='17' cols='50'><p>";
+        identify();
         getFormData();
         generated += "</textarea>";
         $("#generatedHTML").html(generated);
@@ -236,7 +247,6 @@ $(function () {
 
     $("#peopleKilled").blur(function () {
         killedForm = " ";
-        identify();
         getFormData();
         var i = peopleKilled,
             counter = 0;
