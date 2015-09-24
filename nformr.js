@@ -36,51 +36,64 @@ var killedVictim = {};
 var injuredVictim = {};
 var killedID;
 var injuredID;
+var peopleKilledInt;
+var peopleInjuredInt;
+var kWasWere;
+var iWasWere;
 var x = 0,
     y = 0;
 
 function pushKilled() {
     "use strict";
     var i = 1;
-    for (i; i < (peopleKilled + 1); i += 1) {
+    for (i; i < (peopleKilledInt + 1); i += 1) {
         killedVictim = {
             firstName: document.getElementById("killedFName" + i).value,
             lastName: document.getElementById("killedLName" + i).value,
             age: document.getElementById("killedAge" + i).value,
             fullName: document.getElementById("killedFName" + i).value + " " + document.getElementById("killedLName" + i).value
         };
-        killedVictims.push(killedVictim);
+        if (killedVictim.firstName !== "" || killedVictim.lastName !== "" || killedVictim.age !== "") {
+            killedVictims.push(killedVictim);
+        }
     }
 }
 
 function pushInjured() {
     "use strict";
     var i = 1;
-    for (i; i < (peopleInjured + 1); i += 1) {
+    for (i; i < (peopleInjuredInt + 1); i += 1) {
         injuredVictim = {
             firstName: document.getElementById("injuredFName" + i).value,
             lastName: document.getElementById("injuredLName" + i).value,
             age: document.getElementById("injuredAge" + i).value,
             fullName: document.getElementById("injuredFName" + i).value + " " + document.getElementById("injuredLName" + i).value
         };
-        injuredVictims.push(injuredVictim);
+        if (injuredVictim.firstName !== "" || injuredVictim.lastName !== "" || injuredVictim.age !== "") {
+            injuredVictims.push(injuredVictim);
+        }
     }
 }
 
 function identify() {
     "use strict";
+    killedVictims = [];
+    injuredVictims = [];
+    pushInjured();
+    pushKilled();
+    killedID = "";
+    injuredID = "";
     for (x; x < killedVictims.length; x += 1) {
-        killedID = "";
+
         killedID += killedVictims[x].fullName + ", " + killedVictims[x].age + ", ";
-        if (x === (killedVictims.length - 1)) {
+        if (x === (killedVictims.length - 2) && killedVictims.length > 1) {
             killedID += "and ";
         }
     }
 
     for (y; y < injuredVictims.length; y += 1) {
-        injuredID = "";
         injuredID += injuredVictims[y].fullName + ", " + killedVictims[y].age + ", ";
-        if (y === (injuredVictims.length - 1)) {
+        if (y === (injuredVictims.length - 1) && injuredVictims.length > 1) {
             injuredID += "and ";
         }
     }
@@ -109,6 +122,8 @@ function getFormData() {
     peopleInjurednum = peopleInjured;
     peopleKillednum = peopleKilled;
     timehour = time.toTimeString();
+    peopleKilledInt = parseInt(peopleKilled, "10");
+    peopleInjuredInt = parseInt(peopleInjured, "10");
 
     if ((time.getHours() + 5) < 12) {
         timeDescription = "morning";
@@ -122,6 +137,27 @@ function getFormData() {
     if (peopleInjurednum < 10) {
         peopleInjurednum = numbers[peopleInjurednum];
     }
+
+    if (killedVictims.length > 1) {
+        kWasWere = " were killed ";
+    } else {
+        kWasWere = " was killed ";
+    }
+
+    if (injuredVictims.length > 1) {
+        iWasWere = " were injured ";
+    } else {
+        iWasWere = " was injured ";
+    }
+
+    if (killedVictims.length === 0) {
+        kWasWere = "";
+    }
+
+    if (injuredVictims.length === 0) {
+        iWasWere = "";
+    }
+
 
     if (peopleKilled > 0) {
         tfKilled = true;
@@ -168,7 +204,7 @@ function getFormData() {
     if (peopleKilled > 0 || peopleInjured > 0) {
         generated += lawShort + " say " + killed + addAnd + injured + " in a " + crime + " in " + city + " " + day + " " + timeDescription + ".</p>";
         if (killedVictims.length > 0) {
-            generated += "<p>According to the " + lawLong + ", " + killedID + killedTense + addAnd + injuredID + injuredTense + " in a " + crime + " at " + streetAddress + " in " + city + " " + day + ".</p>";
+            generated += "<p>According to the " + lawLong + ", " + killedID + kWasWere + addAnd + injuredID + iWasWere + " in a " + crime + " at " + streetAddress + " in " + city + " " + day + ".</p>";
         }
     } else {
         generated += lawShort + " are investigating a " + crime + " in " + city + " " + day + " " + timeDescription + ".</p>";
@@ -185,6 +221,7 @@ $(function () {
     "use strict";
     $("#generateButton").click(function () {
         generated = "<p>";
+        identify();
         getFormData();
         $("#generatedHTML").html(generated);
 
@@ -199,6 +236,7 @@ $(function () {
 
     $("#peopleKilled").blur(function () {
         killedForm = " ";
+        identify();
         getFormData();
         var i = peopleKilled,
             counter = 0;
