@@ -45,6 +45,19 @@ var iWasWere;
 var x;
 var y;
 
+//Reads user input and converts form  data to variables
+function getFormData() {
+    "use strict";
+    peopleKilled = document.getElementById('peopleKilled').value;
+    peopleInjured = document.getElementById('peopleInjured').value;
+    city = document.getElementById('city').value;
+    state = document.getElementById('state').value;
+    crime = document.getElementById('crime').value.toLowerCase();
+    streetAddress = document.getElementById('streetAddress').value;
+    lawLong = document.getElementById('lawLong').value;
+    time = document.getElementById("date").value;
+}
+//These 2 functions cycle over identified victims and pushes the form data to Javascript Objects in an Array
 function pushKilled() {
     "use strict";
     var i = 1;
@@ -77,6 +90,7 @@ function pushInjured() {
     }
 }
 
+//Cycles over pushed Javascript objects in victms arrays and to create strings
 function identify() {
     "use strict";
     killedVictims = [];
@@ -103,24 +117,17 @@ function identify() {
     }
 }
 
-function getFormData() {
+//Uses data gathered by getFormData() and parses that information to other variables
+function translate() {
     "use strict";
-    peopleKilled = document.getElementById('peopleKilled').value;
-    peopleInjured = document.getElementById('peopleInjured').value;
-    city = document.getElementById('city').value;
     cityAPI = city.replace(" ", "+");
-    state = document.getElementById('state').value;
-    crime = document.getElementById('crime').value.toLowerCase();
-    streetAddress = document.getElementById('streetAddress').value;
     addressAPI = streetAddress.replace(" ", "+");
-    lawLong = document.getElementById('lawLong').value;
     googleMapUrl = "https://maps.googleapis.com/maps/api/staticmap?size=400x400&markers=" + streetAddress + "+" + city + "+" +
         state + "&key=" + keyAPI;
     tfKilled = false;
     tfInjured = false;
     killed = " ";
     injured = " ";
-    time = document.getElementById("date").value;
     time = new Date(time);
     day = days[time.getDay()];
     peopleInjurednum = peopleInjured;
@@ -131,41 +138,6 @@ function getFormData() {
 
     kNotId = peopleKilledInt - killedVictims.length;
     iNotId = peopleInjuredInt - injuredVictims.length;
-
-
-    if ((time.getHours() + 5) < 12) {
-        timeDescription = "morning";
-    } else {
-        timeDescription = "afternoon";
-    }
-
-    if (peopleKillednum < 10) {
-        peopleKillednum = numbers[peopleKillednum];
-    }
-    if (peopleInjurednum < 10) {
-        peopleInjurednum = numbers[peopleInjurednum];
-    }
-
-    if (killedVictims.length > 1) {
-        kWasWere = " were killed ";
-    } else {
-        kWasWere = " was killed ";
-    }
-
-    if (injuredVictims.length > 1) {
-        iWasWere = " were injured ";
-    } else {
-        iWasWere = " was injured ";
-    }
-
-    if (killedVictims.length === 0) {
-        kWasWere = "";
-    }
-
-    if (injuredVictims.length === 0) {
-        iWasWere = "";
-    }
-
 
     if (peopleKilled > 0) {
         tfKilled = true;
@@ -201,13 +173,49 @@ function getFormData() {
         injured = peopleInjurednum + injuredTense + " injured ";
     }
 
+    if (peopleKillednum < 10) {
+        peopleKillednum = numbers[peopleKillednum];
+    }
+    if (peopleInjurednum < 10) {
+        peopleInjurednum = numbers[peopleInjurednum];
+    }
+
+    if (killedVictims.length > 1) {
+        kWasWere = " were killed ";
+    } else {
+        kWasWere = " was killed ";
+    }
+
+    if (injuredVictims.length > 1) {
+        iWasWere = " were injured ";
+    } else {
+        iWasWere = " was injured ";
+    }
+
+    if (killedVictims.length === 0) {
+        kWasWere = "";
+    }
+
+    if (injuredVictims.length === 0) {
+        iWasWere = "";
+    }
+
+    if ((time.getHours() + 5) < 12) {
+        timeDescription = "morning";
+    } else {
+        timeDescription = "afternoon";
+    }
+
     if (lawLong.indexOf("Police") > -1) {
         lawShort = "Police";
     }
     if (lawLong.indexOf("Sheriff's") > -1) {
         lawShort = "Deputies";
     }
+}
 
+function generateProduct() {
+    "use strict";
     generated += city.toUpperCase() + " - ";
     if (peopleKilled > 0 || peopleInjured > 0) {
         generated += lawShort + " say " + killed + addAnd + injured + " in a " + crime + " in " + city + " " + day + " " + timeDescription + ".</p>";
@@ -225,22 +233,27 @@ function getFormData() {
     if ($('#mapCheck').is(':checked')) {
         generated += "<img src='" + googleMapUrl + "'>";
     }
+
 }
 
 $(function () {
     "use strict";
     $("#generateButton").click(function () {
         generated = "<p>";
-        identify();
         getFormData();
+        identify();
+        translate();
+        generateProduct();
         $("#generatedHTML").html(generated);
 
     });
 
     $("#generateHtml").click(function () {
         generated = "<textarea rows='17' cols='50'><p>";
-        identify();
         getFormData();
+        identify();
+        translate();
+        generateProduct();
         generated += "</textarea>";
         $("#generatedHTML").html(generated);
     });
@@ -252,7 +265,7 @@ $(function () {
             counter = 0;
         for (i; i > 0; i -= 1) {
             counter += 1;
-            killedForm += "<p>Killed " + counter + ":</p><form>Name:<br><input type='text' id='killedFName" + counter + "' name='killedFName" + counter + "' placeholder='First Name'><input type='text' id='killedLName" + counter + "' name='killedLName" + counter + "' placeholder='Last Name'><br>Age:<br><input type='number' id='killedAge" + counter + "' name='killedAge" + counter + "'><br><input type='checkbox' id='atScene" + counter + "' name='atScene" + counter + "' value='map'>Died at Scene<br></form>";
+            killedForm += "<p>Killed " + counter + ":</p><form>Name:<br><input type='text' id='killedFName" + counter + "' name='killedFName" + counter + "' placeholder='First Name'><input type='text' id='killedLName" + counter + "' name='killedLName" + counter + "' placeholder='Last Name'><br>Age:<br><input type='number' id='killedAge" + counter + "' name='killedAge" + counter + "'><br></form>";
         }
         $("#killedHTML").html(killedForm);
     });
