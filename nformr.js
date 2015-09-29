@@ -44,6 +44,8 @@ var iNotId;
 var iWasWere;
 var x;
 var y;
+var tfStreetAddress;
+var tfCity;
 
 //Reads user input and converts form  data to variables
 function getFormData() {
@@ -126,6 +128,7 @@ function translate() {
         state + "&key=" + keyAPI;
     tfKilled = false;
     tfInjured = false;
+    crime = crime + " ";
     killed = " ";
     injured = " ";
     time = new Date(time);
@@ -200,10 +203,22 @@ function translate() {
         iWasWere = "";
     }
 
-    if ((time.getHours() + 5) < 12) {
-        timeDescription = "morning";
+    if (streetAddress === "") {
+        tfStreetAddress = "";
     } else {
-        timeDescription = "afternoon";
+        tfStreetAddress = " at " + streetAddress + " ";
+    }
+
+    if (city === "") {
+        tfCity = "";
+    } else {
+        tfCity = " in " + city + " ";
+    }
+
+    if ((time.getHours() + 5) < 12) {
+        timeDescription = " morning";
+    } else {
+        timeDescription = " afternoon";
     }
 
     if (lawLong.indexOf("Police") > -1) {
@@ -216,18 +231,24 @@ function translate() {
 
 function generateProduct() {
     "use strict";
+
     generated += city.toUpperCase() + " - ";
+
+
+
     if (peopleKilled > 0 || peopleInjured > 0) {
-        generated += lawShort + " say " + killed + addAnd + injured + " in a " + crime + " in " + city + " " + day + " " + timeDescription + ".</p>";
+        generated += lawShort + " say " + killed + addAnd + injured + " in a " + crime + tfCity + day + timeDescription + ".</p>";
         if (killedVictims.length > 0 || injuredVictims.length > 0) {
-            generated += "<p>According to the " + lawLong + ", " + killedID + kWasWere + addAnd + injuredID + iWasWere + " in a " + crime + " at " + streetAddress + " in " + city + " " + day + ".</p>";
+            generated += "<p>According to the " + lawLong + ", " + killedID + kWasWere + addAnd + injuredID + iWasWere + " in a " + crime + tfStreetAddress + tfCity + day + ".</p>";
         } else {
-            generated += "<p>According to the " + lawLong + ", " + killed + addAnd + injured + " in a " + crime + " at " + streetAddress + " in " + city + " " + day + ".</p>";
+            generated += "<p>According to the " + lawLong + ", " + killed + addAnd + injured + " in a " + crime + tfStreetAddress + tfCity + day + ".</p>";
         }
     } else {
-        generated += lawShort + " are investigating a " + crime + " in " + city + " " + day + " " + timeDescription + ".</p>";
-        generated += "<p>The " + lawLong + " is currently investigating a " + crime + " at " + streetAddress + " in " + city + " " + day + ".</p>";
+        generated += lawShort + " are investigating a " + crime + tfCity + day + timeDescription + ".</p>";
+        generated += "<p>The " + lawLong + " is currently investigating a " + crime + tfStreetAddress + tfCity + day + ".</p>";
     }
+
+
     generated += "<p>This is a developing story. Stay tuned to <a href ='http://www.wbrz.com/'>WBRZ News 2</a> on <a href ='https://www.facebook.com/WBRZNews2'>Facebook</a> and <a href ='https://twitter.com/wbrz'>Twitter</a> for the lastest updates as they become available.</p>";
 
     if ($('#mapCheck').is(':checked')) {
