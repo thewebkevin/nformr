@@ -60,6 +60,8 @@ function getFormData() {
     streetAddress = document.getElementById('streetAddress').value;
     lawLong = document.getElementById('lawLong').value;
     time = document.getElementById("date").value;
+    peopleKilledInt = parseInt(peopleKilled, "10");
+    peopleInjuredInt = parseInt(peopleInjured, "10");
 }
 //These 2 functions cycle over identified victims and pushes the form data to Javascript Objects in an Array
 function pushKilled() {
@@ -140,8 +142,6 @@ function translate() {
     peopleInjurednum = peopleInjured;
     peopleKillednum = peopleKilled;
     timehour = time.toTimeString();
-    peopleKilledInt = parseInt(peopleKilled, "10");
-    peopleInjuredInt = parseInt(peopleInjured, "10");
 
     kNotId = peopleKilledInt - killedVictims.length;
     iNotId = peopleInjuredInt - injuredVictims.length;
