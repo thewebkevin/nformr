@@ -280,11 +280,19 @@ function generateProduct() {
         generated += "<p>The " + lawLong + " is currently investigating a " + crime + tfStreetAddress + tfCity + day + ".</p>";
     }
 
-
     generated += "<p>This is a developing story. Stay tuned to <a href ='http://www.wbrz.com/'>WBRZ News 2</a> on <a href ='https://www.facebook.com/WBRZNews2'>Facebook</a> and <a href ='https://twitter.com/wbrz'>Twitter</a> for the lastest updates as they become available.</p>";
 
     if ($('#mapCheck').is(':checked')) {
         generated += "<img src='" + googleMapUrl + "'>";
+    }
+
+    if ($('#twitterCheck').is(':checked')) {
+
+        generated += "<br>";
+        generated += '<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/WBRZ" data-widget-id="643930502164930560">Tweets by @WBRZ</a>';
+        generated += '<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?';
+        generated += "'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+";
+        generated += '"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
     }
 
 }
