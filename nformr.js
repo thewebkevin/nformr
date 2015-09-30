@@ -46,6 +46,8 @@ var x;
 var y;
 var tfStreetAddress;
 var tfCity;
+var kIdAddAnd;
+var iIdAddAnd;
 
 //Reads user input and converts form  data to variables
 function getFormData() {
@@ -131,6 +133,8 @@ function translate() {
     crime = crime + " ";
     killed = " ";
     injured = " ";
+    kIdAddAnd = "";
+    iIdAddAnd = "";
     time = new Date(time);
     day = days[time.getDay()];
     peopleInjurednum = peopleInjured;
@@ -183,24 +187,52 @@ function translate() {
         peopleInjurednum = numbers[peopleInjurednum];
     }
 
-    if (killedVictims.length > 1) {
+    if (peopleKilledInt > 1) {
         kWasWere = " were killed ";
     } else {
         kWasWere = " was killed ";
     }
 
-    if (injuredVictims.length > 1) {
+    if (peopleInjuredInt > 1) {
         iWasWere = " were injured ";
     } else {
         iWasWere = " was injured ";
     }
 
-    if (killedVictims.length === 0) {
+    if (peopleKilledInt === 0) {
         kWasWere = "";
     }
 
-    if (injuredVictims.length === 0) {
+    if (peopleInjuredInt === 0) {
         iWasWere = "";
+    }
+
+    if (killedVictims.length > 0 && kNotId > 0) {
+        kIdAddAnd = " and ";
+    }
+
+    if (injuredVictims.length > 0 && iNotId > 0) {
+        iIdAddAnd = " and ";
+    }
+
+    if (kNotId > 1) {
+        kNotId = kNotId + " people ";
+    }
+    if (kNotId === 1) {
+        kNotId = kNotId + " person ";
+    }
+    if (kNotId <= 0) {
+        kNotId = "";
+    }
+
+    if (iNotId > 1) {
+        iNotId = iNotId + " people ";
+    }
+    if (iNotId === 1) {
+        iNotId = iNotId + " person ";
+    }
+    if (iNotId <= 0) {
+        iNotId = "";
     }
 
     if (streetAddress === "") {
@@ -239,7 +271,7 @@ function generateProduct() {
     if (peopleKilled > 0 || peopleInjured > 0) {
         generated += lawShort + " say " + killed + addAnd + injured + " in a " + crime + tfCity + day + timeDescription + ".</p>";
         if (killedVictims.length > 0 || injuredVictims.length > 0) {
-            generated += "<p>According to the " + lawLong + ", " + killedID + kWasWere + addAnd + injuredID + iWasWere + " in a " + crime + tfStreetAddress + tfCity + day + ".</p>";
+            generated += "<p>According to the " + lawLong + ", " + killedID + kIdAddAnd + kNotId + kWasWere + addAnd + injuredID + iIdAddAnd + iNotId + iWasWere + " in a " + crime + tfStreetAddress + tfCity + day + ".</p>";
         } else {
             generated += "<p>According to the " + lawLong + ", " + killed + addAnd + injured + " in a " + crime + tfStreetAddress + tfCity + day + ".</p>";
         }
