@@ -284,7 +284,7 @@ function generateProduct() {
 
     if (peopleKilled > 0 || peopleInjured > 0) {
         headline += "<h1>" + lawShort + ": " + killedHeadline + injuredHeadline + " in " + timeDescription + city + " " + crime + "</h1>";
-        headlineHTML = lawShort + ": " + killedHeadline + injuredHeadline + "in" + timeDescription + city + crime;
+        headlineHTML = lawShort + ": " + killedHeadline + injuredHeadline + "in" + timeDescription + city + " " + crime;
     } else {
         headline += "<h1>" + lawShort + " investigating " + timeDescription + crime + tfCity + "</h1>";
         headlineHTML = lawShort + " investigating" + timeDescription + crime + tfCity;
