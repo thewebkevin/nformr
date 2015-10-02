@@ -166,6 +166,13 @@ function translate() {
         injuredTense = " person was ";
     }
 
+    if (peopleKillednum < 10) {
+        peopleKillednum = numbers[peopleKillednum];
+    }
+    if (peopleInjurednum < 10) {
+        peopleInjurednum = numbers[peopleInjurednum];
+    }
+
     if (tfKilled) {
         killed = peopleKillednum + killedTense + " killed ";
     }
@@ -178,13 +185,6 @@ function translate() {
 
     if (tfInjured) {
         injured = peopleInjurednum + injuredTense + " injured ";
-    }
-
-    if (peopleKillednum < 10) {
-        peopleKillednum = numbers[peopleKillednum];
-    }
-    if (peopleInjurednum < 10) {
-        peopleInjurednum = numbers[peopleInjurednum];
     }
 
     if (peopleKilledInt > 1) {
