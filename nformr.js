@@ -20,7 +20,7 @@ var injuredTense;
 var addAnd;
 var keyAPI = "AIzaSyANnAoaacT1T4QC7Kd9W6e9muA2CZb9FIM";
 var googleMapUrl;
-var generated = "<p>";
+var generated;
 var killedForm = "";
 var injuredForm = "";
 var time;
@@ -48,6 +48,12 @@ var tfStreetAddress;
 var tfCity;
 var kIdAddAnd;
 var iIdAddAnd;
+var headline;
+var killedHeadline;
+var injuredHeadline;
+var headlineHTML;
+var image;
+var imageLink;
 
 //Reads user input and converts form  data to variables
 function getFormData() {
@@ -132,9 +138,10 @@ function translate() {
         state + "&key=" + keyAPI;
     tfKilled = false;
     tfInjured = false;
-    crime = crime + " ";
     killed = " ";
     injured = " ";
+    killedHeadline = "";
+    injuredHeadline = "";
     kIdAddAnd = "";
     iIdAddAnd = "";
     time = new Date(time);
@@ -175,6 +182,7 @@ function translate() {
 
     if (tfKilled) {
         killed = peopleKillednum + killedTense + " killed ";
+        killedHeadline = peopleKillednum + " killed ";
     }
 
     if (tfInjured && tfKilled) {
@@ -185,6 +193,7 @@ function translate() {
 
     if (tfInjured) {
         injured = peopleInjurednum + injuredTense + " injured ";
+        injuredHeadline = peopleInjurednum + " injured ";
     }
 
     if (peopleKilledInt > 1) {
@@ -248,25 +257,43 @@ function translate() {
     }
 
     if ((time.getHours() + 5) < 12) {
-        timeDescription = " morning";
+        timeDescription = " morning ";
     } else {
-        timeDescription = " afternoon";
+        timeDescription = " afternoon ";
     }
 
     if (lawLong.indexOf("Police") > -1) {
         lawShort = "Police";
-    }
-    if (lawLong.indexOf("Sheriff's") > -1) {
+    } else if (lawLong.indexOf("Sheriff's") > -1) {
         lawShort = "Deputies";
+    } else {
+        lawShort = "Officials";
     }
+
+    if (crime === "shooting") {
+        imageLink = "http://www.wbrz.com/images/news/ShootingCrime.jpg";
+    } else if (crime === "stabbing") {
+        imageLink = "http://www.wbrz.com/images/news/FORTDRUMSTABBING.jpg";
+    }
+
+    crime = crime + " ";
 }
 
 function generateProduct() {
     "use strict";
 
+    if (peopleKilled > 0 || peopleInjured > 0) {
+        headline += "<h1>" + lawShort + ": " + killedHeadline + injuredHeadline + " in " + timeDescription + city + " " + crime + "</h1>";
+        headlineHTML = lawShort + ": " + killedHeadline + injuredHeadline + "in" + timeDescription + city + crime;
+    } else {
+        headline += "<h1>" + lawShort + " investigating " + timeDescription + crime + tfCity + "</h1>";
+        headlineHTML = lawShort + " investigating" + timeDescription + crime + tfCity;
+    }
+
+    image = "<img id='imageprev' src='" + imageLink + "'>";
+
+    generated += "<p>";
     generated += city.toUpperCase() + " - ";
-
-
 
     if (peopleKilled > 0 || peopleInjured > 0) {
         generated += lawShort + " say " + killed + addAnd + injured + " in a " + crime + tfCity + day + timeDescription + ".</p>";
@@ -300,23 +327,29 @@ function generateProduct() {
 $(function () {
     "use strict";
     $("#generateButton").click(function () {
-        generated = "<p>";
+        generated = "";
+        headline = "";
         getFormData();
         identify();
         translate();
         generateProduct();
-        $("#generatedHTML").html(generated);
+        $("#generatedHTML").html(headline + image + generated);
 
     });
 
     $("#generateHtml").click(function () {
-        generated = "<textarea rows='17' cols='50'><p>";
+
+        //'<input type="text" id="headline" name="headline" value ="' + headlineHTML + '">';
+
+        generated = "<br><textarea rows='17' cols='50'>";
         getFormData();
         identify();
         translate();
         generateProduct();
+        headlineHTML = "<br><input type='text' id='headline' size='48.5' name='headline' value='" + headlineHTML + "'><br>";
+        image = "<br><input type='text' id='headline' size='48.5' name='headline' value='" + imageLink + "'><br>";
         generated += "</textarea>";
-        $("#generatedHTML").html(generated);
+        $("#generatedHTML").html(headlineHTML + image + generated);
     });
 
     $("#peopleKilled").blur(function () {
