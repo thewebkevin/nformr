@@ -307,7 +307,7 @@ function generateProduct() {
         generated += "<p>The " + lawLong + " is currently investigating a " + crime + tfStreetAddress + tfCity + day + ".</p>";
     }
 
-    generated += "<p>This is a developing story. Stay tuned to <a href ='http://www.wbrz.com/'>WBRZ News 2</a> on <a href ='https://www.facebook.com/WBRZNews2'>Facebook</a> and <a href ='https://twitter.com/wbrz'>Twitter</a> for the lastest updates as they become available.</p>";
+    generated += "<p>This is a developing story. Stay tuned to <a href ='http://www.wbrz.com/'>WBRZ News 2</a> on <a href ='https://www.facebook.com/WBRZNews2'>Facebook</a> and <a href ='https://twitter.com/wbrz'>Twitter</a> for the latest updates as they become available.</p>";
 
     if ($('#mapCheck').is(':checked')) {
         generated += "<img src='" + googleMapUrl + "'>";
